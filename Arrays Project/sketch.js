@@ -13,6 +13,8 @@ let theMoney = {
   passiveMulti: 1,
   multiCost: 5,
   passiveCost: 10,
+  priceMulti: 2,
+  passivePriceMulti: 3,
 };
 let passiveEarn = {
   passiveDelay: 1000,
@@ -45,13 +47,13 @@ function draw() {
   theDelay(earnPassive);
 }
 function mouseClicked() {
-  money += multi;
+  theMoney.money += theMoney.multi;
 }
 function keyTyped() {
-  if (key === "m" && money >= multiCost * multi) {
-    money -= multiCost * multi;
-    multi = multi * 2;
-    multiCost*=2;
+  if (key === "m" && theMoney.money >= theMoney.themoney.multiCost * theMoney.multi) {
+    theMoney.money -= theMoney.themoney.multiCost * multi;
+    theMoney.multi *= theMoney.priceMulti;
+    theMoney.multiCost *= theMoney.priceMulti;
   }
 
   if (key === "p" && money >= passiveCost * passiveMulti) {
