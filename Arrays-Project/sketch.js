@@ -51,36 +51,36 @@ function mouseClicked() {
 }
 function keyTyped() {
   if (key === "m" && theMoney.money >= theMoney.themoney.multiCost * theMoney.multi) {
-    theMoney.money -= theMoney.themoney.multiCost * multi;
+    theMoney.money -= theMoney.themoney.multiCost * theMoney.multi;
     theMoney.multi *= theMoney.priceMulti;
     theMoney.multiCost *= theMoney.priceMulti;
   }
 
-  if (key === "p" && money >= passiveCost * passiveMulti) {
-    money -= passiveCost * passiveMulti;
-    passiveIncome+=passiveMulti;
-    passiveCost*=3;
+  if (key === "p" && theMoney.money >= theMoney.passiveCost * theMoney.passiveMulti) {
+    theMoney.money -= theMoney.passiveCost * theMoney.passiveMulti;
+    theMoney.passiveIncome += theMoney.passiveMulti;
+    theMoney.passiveCost *= theMoney.passivePriceMulti;
   }
   if (key === "s"){
     secretHack();
   }
 }
 function earnPassive() {
-  money += passiveIncome;
+  theMoney.money += theMoney.passiveIncome;
 }
 function displayStats() {
   function displayMoney() {
-    textSize(sizeText);
-    text("Money: $" + money, sizeText, sizeText);
+    textSize(disInfo.sizeText);
+    text("Money: $" + theMoney.money, disInfo.sizeText, disInfo.sizeText);
     
   }
   function displayMulti() {
-    text("Multiplyer: " + multi + "x", sizeText, sizeText * 2);
-    textSize(sizeText);
+    text("Multiplyer: " + theMoney.multi + "x", disInfo.sizeText, disInfo.sizeText * 2);
+    textSize(disInfo.sizeText);
   }
   function displayPassive() {
-    textSize(sizeText);
-    text("Passive Income: $" + passiveIncome + "/s", sizeText, sizeText * 3);
+    textSize(disInfo.sizeText);
+    text("Passive Income: $" + theMoney.passiveIncome + "/s", disInfo.sizeText, disInfo.sizeText * 3);
   }
   displayMoney();
   displayMulti();
@@ -88,17 +88,17 @@ function displayStats() {
 }
 function displayPrice() {
   function displayMultiPrice() {
-    textSize(sizeText);
-    text("More Click Money: $" + multi * multiCost, sizeText, sizeText * 4);
+    textSize(disInfo.sizeText);
+    text("More Click Money: $" + theMoney.multi * theMoney.multiCost, disInfo.sizeText, disInfo.sizeText * 4);
   }
   function displayPassivePrice(textPos) {
-    textSize(sizeText);
-    if (passiveIncome <= 0) {
-      text("Passive Income: $" + passiveCost, sizeText, sizeText * textPos);
+    textSize(disInfo.sizeText);
+    if (theMoney.passiveIncome <= 0) {
+      text("Passive Income: $" + theMoney.passiveCost, disInfo.sizeText, disInfo.sizeText * textPos);
     } 
     else {
       text(
-        "More Passive Income: $" + passiveCost, sizeText, sizeText * textPos);
+        "More Passive Income: $" + theMoney.passiveCost, disInfo.sizeText, disInfo.sizeText * textPos);
     }
   }
   displayMultiPrice();
@@ -106,7 +106,7 @@ function displayPrice() {
 }
 function displayInfo(){
   function displayInfoTitle(){
-    textSize(sizeText);
+    textSize(disInfo.sizeText);
     textStyle(BOLD);
     text("Instructions:", sizeText, sizeText * 6);
   }

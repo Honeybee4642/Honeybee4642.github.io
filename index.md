@@ -4,4 +4,4 @@
 - [the thing](folder-location)
 
 ## Projects
-[ArraysProject](Arrays-Project)
+- [ArraysProject](Arrays-Project)
