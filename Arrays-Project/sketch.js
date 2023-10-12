@@ -50,15 +50,20 @@ function mouseClicked() {
   theMoney.money += theMoney.multi;
 }
 function keyTyped() {
-  if (key === "m" && theMoney.money >= theMoney.themoney.multiCost * theMoney.multi) {
-    theMoney.money -= theMoney.themoney.multiCost * theMoney.multi;
+  if (key === "m" && theMoney.money >= theMoney.multiCost * theMoney.multi) {
+    theMoney.money -= theMoney.multiCost * theMoney.multi;
     theMoney.multi *= theMoney.priceMulti;
     theMoney.multiCost *= theMoney.priceMulti;
   }
 
   if (key === "p" && theMoney.money >= theMoney.passiveCost * theMoney.passiveMulti) {
     theMoney.money -= theMoney.passiveCost * theMoney.passiveMulti;
-    theMoney.passiveIncome += theMoney.passiveMulti;
+    if (theMoney.passiveIncome <= 1){
+      theMoney.passiveIncome += theMoney.passiveMulti;
+    }
+    else{
+      theMoney.passiveIncome *= theMoney.passiveMulti * 2;
+    }
     theMoney.passiveCost *= theMoney.passivePriceMulti;
   }
   if (key === "s"){
