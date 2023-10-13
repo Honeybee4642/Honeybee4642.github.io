@@ -6,6 +6,7 @@
 // - describe what you did to take this project "above and beyond"
 
 
+let theClickBallArray = [];
 let theMoney = {
   money: 0,
   passiveIncome: 0,
@@ -37,6 +38,8 @@ let shouldAdd = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   keyTyped();
+  let theBall = makeBall();
+  theClickBallArray.push(theBall);
 }
 
 function draw() {
@@ -48,6 +51,11 @@ function draw() {
 }
 function mouseClicked() {
   theMoney.money += theMoney.multi;
+  function clicking(theFunction){
+    let theClickBall = makeBall(0);
+    theClickBallArray.push(theClickBall);
+  } 
+  clicking(displayBall());
 }
 function keyTyped() {
   if (key === "m" && theMoney.money >= theMoney.multiCost * theMoney.multi) {
@@ -137,5 +145,26 @@ function theDelay(theFunction){
   }
 }
 function secretHack(){
-  money += 1000000;
+  money += 999999999;
+}
+function makeBall(size){
+  let clickBall = {
+    x: mouseX,
+    y: mouseY,
+    diameter: size,
+    color: color(random(255), random(255), random(2550)),
+  };
+  return clickBall;
+}
+function growBall(){
+  for (let grow = 0; grow <=50; grow++){
+    makeBall(grow);
+  }
+}
+function displayBall(){
+  for (let i = 0; i < theClickBallArray.length; i++){
+    let clickBall = theClickBallArray[i];
+    fill(clickBall.color);
+    circle(clickBall.x, clickBall.y, clickBall.diameter);
+  }
 }
