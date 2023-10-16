@@ -48,14 +48,13 @@ function draw() {
   displayPrice();
   displayInfo();
   theDelay(earnPassive);
+  displayBall();
 }
 function mouseClicked() {
-  theMoney.money += theMoney.multi;
-  function clicking(theFunction){
-    let theClickBall = makeBall(0);
-    theClickBallArray.push(theClickBall);
-  } 
-  clicking(displayBall());
+  earnByClick();
+}
+function mousePressed(){
+  ballClick();
 }
 function keyTyped() {
   if (key === "m" && theMoney.money >= theMoney.multiCost * theMoney.multi) {
@@ -78,20 +77,31 @@ function keyTyped() {
     secretHack();
   }
 }
+function earnByClick(){
+  theMoney.money += theMoney.multi;
+}
+function ballClick(){
+  let theBall = makeBall();
+  theClickBallArray.push(theBall);
+  makeBall();
+}
 function earnPassive() {
   theMoney.money += theMoney.passiveIncome;
 }
 function displayStats() {
   function displayMoney() {
+    fill("black");
     textSize(disInfo.sizeText);
     text("Money: $" + theMoney.money, disInfo.sizeText, disInfo.sizeText);
     
   }
   function displayMulti() {
+    fill("black");
     text("Multiplyer: " + theMoney.multi + "x", disInfo.sizeText, disInfo.sizeText * 2);
     textSize(disInfo.sizeText);
   }
   function displayPassive() {
+    fill("black");
     textSize(disInfo.sizeText);
     text("Passive Income: $" + theMoney.passiveIncome + "/s", disInfo.sizeText, disInfo.sizeText * 3);
   }
@@ -101,10 +111,12 @@ function displayStats() {
 }
 function displayPrice() {
   function displayMultiPrice() {
+    fill("black");
     textSize(disInfo.sizeText);
     text("More Click Money: $" + theMoney.multi * theMoney.multiCost, disInfo.sizeText, disInfo.sizeText * 4);
   }
   function displayPassivePrice(textPos) {
+    fill("black");
     textSize(disInfo.sizeText);
     if (theMoney.passiveIncome <= 0) {
       text("Passive Income: $" + theMoney.passiveCost, disInfo.sizeText, disInfo.sizeText * textPos);
@@ -119,11 +131,13 @@ function displayPrice() {
 }
 function displayInfo(){
   function displayInfoTitle(){
+    fill("black");
     textSize(disInfo.sizeText);
     textStyle(BOLD);
     text("Instructions:", sizeText, sizeText * 6);
   }
   function displayTheInfo(){
+    fill("black");
     textSize(sizeText);
     textStyle(NORMAL);
     text("Press M to buy more click money.", sizeText, sizeText * 7);
@@ -157,14 +171,22 @@ function makeBall(size){
   return clickBall;
 }
 function growBall(){
-  for (let grow = 0; grow <=50; grow++){
+  let grow;
+  for (let i = 0; i < theClickBallArray.length; i++){
+    let TheBall = theClickBallArray;
+  }
+  
+  for (grow = 0; grow <=50; grow++){
+    makeBall(grow);
+  }
+  for (grow >= 50; grow >=0; grow --){
     makeBall(grow);
   }
 }
 function displayBall(){
   for (let i = 0; i < theClickBallArray.length; i++){
-    let clickBall = theClickBallArray[i];
-    fill(clickBall.color);
-    circle(clickBall.x, clickBall.y, clickBall.diameter);
+    let theBall = theClickBallArray[i];
+    fill(theBall.color);
+    circle(theBall.x, theBall.y, theBall.diameter);
   }
 }
