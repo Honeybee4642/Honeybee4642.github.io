@@ -38,8 +38,8 @@ let shouldAdd = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
   keyTyped();
-  let theBall = makeBall();
-  theClickBallArray.push(theBall);
+  let clickBall = makeBall();
+  theClickBallArray.push(clickBall);
 }
 
 function draw() {
@@ -81,8 +81,8 @@ function earnByClick(){
   theMoney.money += theMoney.multi;
 }
 function ballClick(){
-  let theBall = makeBall();
-  theClickBallArray.push(theBall);
+  let clickBall = makeBall();
+  theClickBallArray.push(clickBall);
   makeBall();
 }
 function earnPassive() {
@@ -172,10 +172,6 @@ function makeBall(size){
 }
 function growBall(){
   let grow;
-  for (let i = 0; i < theClickBallArray.length; i++){
-    let TheBall = theClickBallArray;
-  }
-  
   for (grow = 0; grow <=50; grow++){
     makeBall(grow);
   }
