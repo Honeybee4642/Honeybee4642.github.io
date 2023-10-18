@@ -49,6 +49,7 @@ function draw() {
   displayInfo();
   theDelay(earnPassive);
   displayBall();
+  growBall();
 }
 function mouseClicked() {
   earnByClick();
@@ -161,28 +162,33 @@ function theDelay(theFunction){
 function secretHack(){
   money += 999999999;
 }
-function makeBall(size){
+function makeBall(){
   let clickBall = {
     x: mouseX,
     y: mouseY,
-    diameter: size,
+    diameter: 0,
     color: color(random(255), random(255), random(2550)),
+    growSpeed: 2,
   };
   return clickBall;
 }
 function growBall(){
-  let grow;
-  for (grow = 0; grow <=50; grow++){
-    makeBall(grow);
+  for (let i = 0; i < theClickBallArray.length; i++){
+    let clickBall = makeBall();
+    clickBall = theClickBallArray[i];
+    if (clickBall.diameter <= 0 && clickBall.diameter >= 50){
+      clickBall.diameter += clickBall.growSpeed;
+    }
+    else if (clickBall.diameter >= 50 && clickBall.diameter >=0){
+      clickBall.diameter-= clickBall.growSpeed;
+    }
   }
-  for (grow >= 50; grow >=0; grow --){
-    makeBall(grow);
-  }
+  
 }
 function displayBall(){
   for (let i = 0; i < theClickBallArray.length; i++){
-    let theBall = theClickBallArray[i];
-    fill(theBall.color);
-    circle(theBall.x, theBall.y, theBall.diameter);
+    let clickBall = theClickBallArray[i];
+    fill(clickBall.color);
+    circle(clickBall.x, clickBall.y, clickBall.diameter);
   }
 }
