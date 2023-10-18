@@ -37,9 +37,10 @@ let timePassedEarn = 0;
 let shouldAdd = true;
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  keyTyped();
   let clickBall = makeBall();
   theClickBallArray.push(clickBall);
+  keyTyped();
+  
 }
 
 function draw() {
@@ -85,6 +86,7 @@ function ballClick(){
   let clickBall = makeBall();
   theClickBallArray.push(clickBall);
   makeBall();
+  console.log(displayBall());
 }
 function earnPassive() {
   theMoney.money += theMoney.passiveIncome;
@@ -174,8 +176,7 @@ function makeBall(){
 }
 function growBall(){
   for (let i = 0; i < theClickBallArray.length; i++){
-    let clickBall = makeBall();
-    clickBall = theClickBallArray[i];
+    let = clickBall = theClickBallArray[i];
     if (clickBall.diameter <= 0 && clickBall.diameter >= 50){
       clickBall.diameter += clickBall.growSpeed;
     }
