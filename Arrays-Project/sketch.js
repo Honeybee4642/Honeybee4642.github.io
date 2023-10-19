@@ -86,7 +86,8 @@ function ballClick(){
   let clickBall = makeBall();
   theClickBallArray.push(clickBall);
   makeBall();
-  console.log(displayBall());
+  
+  // console.log(displayBall());
 }
 function earnPassive() {
   theMoney.money += theMoney.passiveIncome;
@@ -175,17 +176,23 @@ function makeBall(){
   return clickBall;
 }
 function growBall(){
-  for (let i = 0; i < theClickBallArray.length; i++){
-    let = clickBall = theClickBallArray[i];
-    if (clickBall.diameter <= 0 && clickBall.diameter >= 50){
-      clickBall.diameter += clickBall.growSpeed;
-    }
-    else if (clickBall.diameter >= 50 && clickBall.diameter >=0){
-      clickBall.diameter-= clickBall.growSpeed;
+  let clickBall = makeBall();
+  let i;
+  clickBall = theClickBallArray[i];
+  if (i >= 0 && i <= 50){
+    for (i = 0; i < theClickBallArray.length; i++){
+     clickBall.diameter += clickBall.growSpeed;
+      console.log (clickBall.diameter);
+      }
     }
   }
+  else if (i >= 50 && i <=0){
+    for (i = 50; i > theClickBallArray.length; i--){
+      clickBall.diameter -= clickBall.growSpeed;
+  }
+} 
+
   
-}
 function displayBall(){
   for (let i = 0; i < theClickBallArray.length; i++){
     let clickBall = theClickBallArray[i];
