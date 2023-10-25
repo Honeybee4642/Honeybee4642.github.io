@@ -23,15 +23,28 @@ function draw() {
   }
   
 }
+
+function mousePressed(){
+  let y = Math.floor(mouseY/cellSize);
+  let x = Math.floor(mouseX/cellSize);
+  if(grid[y][x] === 1){
+    grid[y][x] = 0;
+  }
+  else if(grid[y][x] === 0){
+    grid[y][x] = 1;
+  } 
+}
 function keyTyped(){
   if(key === "r"){
     grid = genGrid(GRIDSIZE, GRIDSIZE);
   } 
   if(key === "e"){
-    emptyGrid();
+    grid = emptyGrid(GRIDSIZE, GRIDSIZE);
+  }
+  if(key === "f"){
+    grid = fillGrid(GRIDSIZE, GRIDSIZE);
   }
 }
-
 function displayGrid(){
   for(let y =0 ; y < GRIDSIZE; y++){
     for(let x = 0; x < GRIDSIZE; x++){
@@ -60,8 +73,6 @@ function genGrid(cols, rows){
   }
   return randomArray;
 }
-
-
 function emptyGrid(cols, rows){
   let randomArray = [];
   for(let y = 0; y < cols; y++){
@@ -70,4 +81,15 @@ function emptyGrid(cols, rows){
       randomArray[y].push(0);
     }
   }
+  return randomArray;
+}
+function fillGrid(cols, rows){
+  let randomArray = [];
+  for(let y = 0; y < cols; y++){
+    randomArray.push([]);
+    for(let x = 0; x < rows; x++){
+      randomArray[y].push(1);
+    }
+  }
+  return randomArray;
 }
