@@ -27,12 +27,11 @@ function draw() {
 function mousePressed(){
   let y = Math.floor(mouseY/cellSize);
   let x = Math.floor(mouseX/cellSize);
-  if(grid[y][x] === 1){
-    grid[y][x] = 0;
-  }
-  else if(grid[y][x] === 0){
-    grid[y][x] = 1;
-  } 
+  toggleCell(x,y);
+  toggleCell(x, y-1);
+  toggleCell(x, y+1);
+  toggleCell(x-1, y);
+  toggleCell(x+1, y);
 }
 function keyTyped(){
   if(key === "r"){
@@ -44,6 +43,16 @@ function keyTyped(){
   if(key === "f"){
     grid = fillGrid(GRIDSIZE, GRIDSIZE);
   }
+}
+function toggleCell(x, y){
+  if(x >= 0 && x <= GRIDSIZE && y >= 0 && y <= GRIDSIZE){
+    if(grid[y][x] === 1){
+      grid[y][x] = 0;
+    }
+    else if(grid[y][x] === 0){
+      grid[y][x] = 1;
+    } 
+  } 
 }
 function displayGrid(){
   for(let y =0 ; y < GRIDSIZE; y++){
