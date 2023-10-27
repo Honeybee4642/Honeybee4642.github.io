@@ -2,7 +2,6 @@
 // Your Name
 // Date
 
-// let grid = [[1,0,0,1],[0,0,1,1],[1,1,0,1],[0,1,1,1]];
 let grid;
 let cellSize;
 const GRIDSIZE = 30;
