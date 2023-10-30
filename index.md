@@ -6,6 +6,7 @@
 - [Terrain](Terrain)
 - [Draw Grid](2DGrid)
 - [Game of Life](GameOfLife)
+- [Char on Grid](CharOnGrid)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
