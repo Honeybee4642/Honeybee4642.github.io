@@ -8,10 +8,11 @@
 
 let grid;
 let cellSize;
-const GRIDSIZE = 30;
+const GRIDSIZE = 50;
 let autoPlay = true;
+let glitchSound;
 function preload(){
-  
+  glitchSound = loadSound("glitchsound.mp3");
 }
 
 function setup() {
@@ -47,6 +48,9 @@ function keyTyped(){
   }
   else if(key === "f"){
     grid = fillGrid(GRIDSIZE, GRIDSIZE);
+    if(!glitchSound.isPlaying() && !autoPlay){
+      glitchSound.loop();
+    }
   }
   else if(key ===" "){
     grid = nextTurn();
