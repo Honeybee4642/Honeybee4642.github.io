@@ -11,8 +11,14 @@ let cellSize;
 const GRIDSIZE = 50;
 let autoPlay = true;
 let glitchSound;
+let amongUs;
+let amongUsSound;
 function preload(){
   glitchSound = loadSound("glitchsound.mp3");
+  amongUs = loadImage("RedImp.jpeg");
+  amongUsSound = loadSound("amongUs.mp3");
+  glitchSound.setVolume(0.1);
+  amongUsSound.setVolume(5);
 }
 
 function setup() {
@@ -34,10 +40,15 @@ function draw() {
   displayGrid();
 }
 
-function mousePressed(){
+function mouseClicked(){
   let y = Math.floor(mouseY/cellSize);
   let x = Math.floor(mouseX/cellSize);
   toggleCell(x,y);
+}
+function doubleClicked(){
+  let y = Math.floor(mouseY/cellSize);
+  let x = Math.floor(mouseX/cellSize);
+  toggleAU(x,y);
 }
 function keyTyped(){
   if(key === "r"){
@@ -94,16 +105,34 @@ function toggleCell(x, y){
     } 
   } 
 }
+function toggleAU(x, y){
+  if(x >= 0 && x <= GRIDSIZE && y >= 0 && y <= GRIDSIZE){
+    if(grid[y][x] === 1 || 0){
+      grid[y][x] = 2;
+    }
+    else if(grid[y][x] === 2){
+      grid[y][x] = 0;
+    } 
+  } 
+}
 function displayGrid(){
   for(let y =0 ; y < GRIDSIZE; y++){
     for(let x = 0; x < GRIDSIZE; x++){
       if (grid[y][x]===0){
-        fill ("white");
+        fill("white");
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
-      if (grid[y][x]===1){
+      if(grid[y][x]===1){
         fill(random(255),random(255), random(255));
+        rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
-      rect(x*cellSize, y*cellSize, cellSize, cellSize);
+      if(grid[y][x]===2){
+        if(!amongUsSound.isPlaying()){
+          amongUsSound.play();
+        }
+        image(amongUs, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+      // rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
   }
 }
