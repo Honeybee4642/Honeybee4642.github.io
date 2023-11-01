@@ -22,7 +22,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth*0.9, windowHeight*0.9);
   grid = genGrid(GRIDSIZE, GRIDSIZE);
   if(height > width){
     cellSize = width/GRIDSIZE;
@@ -43,13 +43,24 @@ function draw() {
 function mouseClicked(){
   let y = Math.floor(mouseY/cellSize);
   let x = Math.floor(mouseX/cellSize);
-  toggleCell(x,y);
+  let theRandomThing = random(1);
+  let occur ={
+    among: theRandomThing <= 0.25,
+    normal: theRandomThing > 0.25,
+  };
+  console.log(occur);
+  if(occur.normal){
+    toggleCell(x,y);
+  }
+  if(occur.among){
+    toggleAU(x,y);
+  }
 }
-function doubleClicked(){
-  let y = Math.floor(mouseY/cellSize);
-  let x = Math.floor(mouseX/cellSize);
-  toggleAU(x,y);
-}
+// function doubleClicked(){
+//   let y = Math.floor(mouseY/cellSize);
+//   let x = Math.floor(mouseX/cellSize);
+//   toggleAU(x,y);
+// }
 function keyTyped(){
   if(key === "r"){
     grid = genGrid(GRIDSIZE, GRIDSIZE);
@@ -102,6 +113,9 @@ function toggleCell(x, y){
     }
     else if(grid[y][x] === 0){
       grid[y][x] = 1;
+    }
+    else if(grid[y][x] === 2){
+      grid[y][x] = 1;
     } 
   } 
 }
@@ -111,7 +125,7 @@ function toggleAU(x, y){
       grid[y][x] = 2;
     }
     else if(grid[y][x] === 2){
-      grid[y][x] = 0;
+      grid[y][x] = 1;
     } 
   } 
 }
