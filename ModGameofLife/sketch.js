@@ -9,13 +9,15 @@
 let grid;
 let cellSize;
 const GRIDSIZE = 50;
-let autoPlay = true;
+let autoPlay = false;
 let glitchSound;
 let amongUs;
+let amongUs2;
 let amongUsSound;
 function preload(){
   glitchSound = loadSound("glitchsound.mp3");
   amongUs = loadImage("RedImp.jpeg");
+  amongUs2 = loadImage("Green.jpeg")
   amongUsSound = loadSound("amongUs.mp3");
   glitchSound.setVolume(0.1);
   amongUsSound.setVolume(5);
@@ -46,21 +48,20 @@ function mouseClicked(){
   let theRandomThing = random(1);
   let occur ={
     among: theRandomThing <= 0.25,
-    normal: theRandomThing > 0.25,
+    among2: theRandomThing >= 0.75,
+    normal: theRandomThing > 0.25 && theRandomThing < 0.75,
   };
   console.log(occur);
   if(occur.normal){
     toggleCell(x,y);
   }
-  if(occur.among){
+  else if(occur.among){
     toggleAU(x,y);
   }
+  else if(occur.among2){
+    toggleAU2(x,y);
+  }
 }
-// function doubleClicked(){
-//   let y = Math.floor(mouseY/cellSize);
-//   let x = Math.floor(mouseX/cellSize);
-//   toggleAU(x,y);
-// }
 function keyTyped(){
   if(key === "r"){
     grid = genGrid(GRIDSIZE, GRIDSIZE);
@@ -99,8 +100,14 @@ function nextTurn(){
           nextTurnGrid[y][x] = 1;
         }
         else{
-          nextTurnGrid[y][x] =0;
+          nextTurnGrid[y][x] = 0;
         } 
+      }
+      if(grid[y][x] ===2){
+        nextTurnGrid[y][x] = 0;
+      }
+      if(grid[y][x] ===3){
+        nextTurnGrid[y][x] = 1;
       }
     }
   }
@@ -121,10 +128,26 @@ function toggleCell(x, y){
 }
 function toggleAU(x, y){
   if(x >= 0 && x <= GRIDSIZE && y >= 0 && y <= GRIDSIZE){
-    if(grid[y][x] === 1 || 0){
+    if(grid[y][x] === 1){
+      grid[y][x] = 2;
+    }
+    else if(grid[y][x] === 0){
       grid[y][x] = 2;
     }
     else if(grid[y][x] === 2){
+      grid[y][x] = 1;
+    } 
+  } 
+}
+function toggleAU2(x, y){
+  if(x >= 0 && x <= GRIDSIZE && y >= 0 && y <= GRIDSIZE){
+    if(grid[y][x] === 1){
+      grid[y][x] = 3;
+    }
+    else if(grid[y][x] === 0){
+      grid[y][x] = 3;
+    }
+    else if(grid[y][x] === 3){
       grid[y][x] = 1;
     } 
   } 
@@ -141,10 +164,11 @@ function displayGrid(){
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if(grid[y][x]===2){
-        if(!amongUsSound.isPlaying()){
-          amongUsSound.play();
-        }
+        amongUsSound.play();
         image(amongUs, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+      if(grid[y][x]===3){
+        image(amongUs2, x*cellSize, y*cellSize, cellSize, cellSize);
       }
       // rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
