@@ -17,7 +17,7 @@ let amongUsSound;
 function preload(){
   glitchSound = loadSound("glitchsound.mp3");
   amongUs = loadImage("RedImp.jpeg");
-  amongUs2 = loadImage("Green.jpeg")
+  amongUs2 = loadImage("Green.jpeg");
   amongUsSound = loadSound("amongUs.mp3");
   glitchSound.setVolume(0.1);
   amongUsSound.setVolume(5);
@@ -57,6 +57,7 @@ function mouseClicked(){
   }
   else if(occur.among){
     toggleAU(x,y);
+    amongUsSound.play();
   }
   else if(occur.among2){
     toggleAU2(x,y);
@@ -68,6 +69,7 @@ function keyTyped(){
   } 
   else if(key === "e"){
     grid = emptyGrid(GRIDSIZE, GRIDSIZE);
+    glitchSound.stop();
   }
   else if(key === "f"){
     grid = fillGrid(GRIDSIZE, GRIDSIZE);
@@ -164,7 +166,9 @@ function displayGrid(){
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if(grid[y][x]===2){
-        amongUsSound.play();
+        // if(!amongUsSound.isPlaying()){
+        //   amongUsSound.play();
+        // }
         image(amongUs, x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if(grid[y][x]===3){
