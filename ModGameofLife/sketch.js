@@ -77,11 +77,14 @@ function keyTyped(){
       glitchSound.loop();
     }
   }
-  else if(key ===" "){
+  else if(key === " "){
     grid = nextTurn();
   }
   else if(key === "a"){
     autoPlay = !autoPlay;
+  }
+  else if(key === "i"){
+    grid = fillAmong(GRIDSIZE, GRIDSIZE);
   }
 }
 function nextTurn(){
@@ -126,6 +129,9 @@ function toggleCell(x, y){
     else if(grid[y][x] === 2){
       grid[y][x] = 1;
     } 
+    else if(grid[x][y] === 3){
+      grid[y][x] = 1;
+    }
   } 
 }
 function toggleAU(x, y){
@@ -166,9 +172,6 @@ function displayGrid(){
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if(grid[y][x]===2){
-        // if(!amongUsSound.isPlaying()){
-        //   amongUsSound.play();
-        // }
         image(amongUs, x*cellSize, y*cellSize, cellSize, cellSize);
       }
       if(grid[y][x]===3){
@@ -211,5 +214,16 @@ function fillGrid(cols, rows){
       randomArray[y].push(1);
     }
   }
+  return randomArray;
+}
+function fillAmong(cols,rows){
+  let randomArray = [];
+  for(let y = 0; y < rows; y++){
+    randomArray.push([]);
+    for(let x = 0; x < cols; x++){
+      randomArray[y].push(2);
+    }
+  }
+  amongUsSound.play();
   return randomArray;
 }
