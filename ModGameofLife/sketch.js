@@ -14,13 +14,16 @@ let glitchSound;
 let amongUs;
 let amongUs2;
 let amongUsSound;
+let dSound;
 function preload(){
   glitchSound = loadSound("glitchsound.mp3");
   amongUs = loadImage("RedImp.jpeg");
   amongUs2 = loadImage("Green.jpeg");
   amongUsSound = loadSound("amongUs.mp3");
+  dSound = loadSound("slap.mp3");
   glitchSound.setVolume(0.1);
   amongUsSound.setVolume(5);
+  dSound.setVolume(5.5);
 }
 
 function setup() {
@@ -70,6 +73,7 @@ function keyTyped(){
   else if(key === "e"){
     grid = emptyGrid(GRIDSIZE, GRIDSIZE);
     glitchSound.stop();
+    dieSound();
   }
   else if(key === "f"){
     grid = fillGrid(GRIDSIZE, GRIDSIZE);
@@ -100,18 +104,29 @@ function nextTurn(){
         }
       }
       neighbours -= grid[y][x];
-      if(grid[y][x] ===1){
-        if(neighbours ===2 || neighbours ===3){
+      if(grid[y][x] === 1){
+        if(neighbours === 2 || neighbours ===3){
           nextTurnGrid[y][x] = 1;
         }
         else{
           nextTurnGrid[y][x] = 0;
         } 
       }
-      if(grid[y][x] ===2){
-        nextTurnGrid[y][x] = 0;
+      if(grid[y][x] === 0){
+        if(neighbours === 3){
+          nextTurnGrid[y][x] = 1;
+        }
+        else{
+          nextTurnGrid[y][x] = 0;
+        }
       }
-      if(grid[y][x] ===3){
+      if(grid[y][x] === 2){
+        nextTurnGrid[y][x] = 0;
+        dieSound();
+      }
+      if(grid[y][x] === 3){
+        neighbours = 9;
+        nextTurnGrid[y][x] = neighbours;
         nextTurnGrid[y][x] = 1;
       }
     }
@@ -145,7 +160,10 @@ function toggleAU(x, y){
     else if(grid[y][x] === 2){
       grid[y][x] = 1;
     } 
-  } 
+    else if(grid[x][y] === 3){
+      grid[y][x] = 1;
+    } 
+  }
 }
 function toggleAU2(x, y){
   if(x >= 0 && x <= GRIDSIZE && y >= 0 && y <= GRIDSIZE){
@@ -157,11 +175,14 @@ function toggleAU2(x, y){
     }
     else if(grid[y][x] === 3){
       grid[y][x] = 1;
+    }
+    else if(grid[x][y] === 2){
+      grid[y][x] = 1; 
     } 
-  } 
+  }
 }
 function displayGrid(){
-  for(let y =0 ; y < GRIDSIZE; y++){
+  for(let y = 0 ; y < GRIDSIZE; y++){
     for(let x = 0; x < GRIDSIZE; x++){
       if (grid[y][x]===0){
         fill("white");
@@ -202,6 +223,7 @@ function emptyGrid(cols, rows){
     randomArray.push([]);
     for(let x = 0; x < cols; x++){
       randomArray[y].push(0);
+      dieSound();
     }
   }
   return randomArray;
@@ -226,4 +248,9 @@ function fillAmong(cols,rows){
   }
   amongUsSound.play();
   return randomArray;
+}
+function dieSound(){
+  if(!dSound.isPlaying()){
+    dSound.play();
+  }
 }
