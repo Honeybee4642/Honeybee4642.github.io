@@ -1,5 +1,5 @@
-// Project Title
-// Your Name
+// Modified Game Of Life
+// Tilden
 // Date
 //
 // Extra for Experts:
@@ -15,15 +15,18 @@ let amongUs;
 let amongUs2;
 let amongUsSound;
 let dSound;
+let rSound;
 function preload(){
   glitchSound = loadSound("glitchsound.mp3");
   amongUs = loadImage("RedImp.jpeg");
   amongUs2 = loadImage("Green.jpeg");
   amongUsSound = loadSound("amongUs.mp3");
   dSound = loadSound("slap.mp3");
-  glitchSound.setVolume(0.1);
+  rSound = loadSound("rRoll.mp3");
+  glitchSound.setVolume(4.5);
   amongUsSound.setVolume(5);
   dSound.setVolume(5.5);
+  rSound.setVolume(5.7);
 }
 
 function setup() {
@@ -39,8 +42,9 @@ function setup() {
 
 function draw() {
   background(220);
-  if(autoPlay && frameCount % 10 === 0){
+  if(autoPlay && frameCount % 3 === 0){
     grid = nextTurn();
+    dSound.stop();
   }
   displayGrid();
 }
@@ -73,6 +77,7 @@ function keyTyped(){
   else if(key === "e"){
     grid = emptyGrid(GRIDSIZE, GRIDSIZE);
     glitchSound.stop();
+    rSound.stop();
     dieSound();
   }
   else if(key === "f"){
@@ -83,6 +88,7 @@ function keyTyped(){
   }
   else if(key === " "){
     grid = nextTurn();
+    rSound.stop();
   }
   else if(key === "a"){
     autoPlay = !autoPlay;
@@ -90,8 +96,15 @@ function keyTyped(){
   else if(key === "i"){
     grid = fillAmong(GRIDSIZE, GRIDSIZE);
   }
+  else if(key === "c"){
+    // theDelay(1000, rSound);
+    if(!rSound.isPlaying()){
+      rSound.play();
+    }
+  }
 }
 function nextTurn(){
+  rSound.stop();
   let nextTurnGrid = emptyGrid(GRIDSIZE, GRIDSIZE);
   for(let y = 0; y < GRIDSIZE; y++){
     for(let x = 0; x < GRIDSIZE; x++){
@@ -122,7 +135,6 @@ function nextTurn(){
       }
       if(grid[y][x] === 2){
         nextTurnGrid[y][x] = 0;
-        dieSound();
       }
       if(grid[y][x] === 3){
         neighbours = 9;
@@ -254,3 +266,13 @@ function dieSound(){
     dSound.play();
   }
 }
+// function theDelay(time, theSound){
+//   let timePassed = 0;
+//   if(millis() > timePassed + time){
+//     theSound.play();
+//     timePassed = millis();
+//   }
+//   else{
+//     theSound.stop();
+//   }
+// }
