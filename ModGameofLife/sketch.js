@@ -1,5 +1,5 @@
 // Modified Game Of Life
-// Tilden
+// Tilden Bruins
 // Date
 //
 // Extra for Experts:
@@ -13,6 +13,7 @@ let autoPlay = false;
 let glitchSound;
 let amongUs;
 let amongUs2;
+let rGif;
 let amongUsSound;
 let dSound;
 let rSound;
@@ -20,6 +21,7 @@ function preload(){
   glitchSound = loadSound("glitchsound.mp3");
   amongUs = loadImage("RedImp.jpeg");
   amongUs2 = loadImage("Green.jpeg");
+  rGif = loadImage("rickrollRoll.gif");
   amongUsSound = loadSound("amongUs.mp3");
   dSound = loadSound("slap.mp3");
   rSound = loadSound("rRoll.mp3");
@@ -30,7 +32,7 @@ function preload(){
 }
 
 function setup() {
-  createCanvas(windowWidth*0.9, windowHeight*0.9);
+  createCanvas(windowWidth*0.9, windowHeight*0.91);
   grid = genGrid(GRIDSIZE, GRIDSIZE);
   if(height > width){
     cellSize = width/GRIDSIZE;
@@ -47,6 +49,7 @@ function draw() {
     dSound.stop();
   }
   displayGrid();
+  disInfo(20);
 }
 
 function mouseClicked(){
@@ -73,6 +76,7 @@ function mouseClicked(){
 function keyTyped(){
   if(key === "r"){
     grid = genGrid(GRIDSIZE, GRIDSIZE);
+    rSound.stop();
   } 
   else if(key === "e"){
     grid = emptyGrid(GRIDSIZE, GRIDSIZE);
@@ -101,6 +105,7 @@ function keyTyped(){
     if(!rSound.isPlaying()){
       rSound.play();
     }
+    grid = fillRick(GRIDSIZE, GRIDSIZE);
   }
 }
 function nextTurn(){
@@ -200,15 +205,18 @@ function displayGrid(){
         fill("white");
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
-      if(grid[y][x]===1){
+      else if(grid[y][x]===1){
         fill(random(255),random(255), random(255));
         rect(x*cellSize, y*cellSize, cellSize, cellSize);
       }
-      if(grid[y][x]===2){
+      else if(grid[y][x]===2){
         image(amongUs, x*cellSize, y*cellSize, cellSize, cellSize);
       }
-      if(grid[y][x]===3){
+      else if(grid[y][x]===3){
         image(amongUs2, x*cellSize, y*cellSize, cellSize, cellSize);
+      }
+      else if(grid[y][x]===4){
+        image(rGif, x*cellSize, y*cellSize, cellSize, cellSize);
       }
       // rect(x*cellSize, y*cellSize, cellSize, cellSize);
     }
@@ -250,6 +258,16 @@ function fillGrid(cols, rows){
   }
   return randomArray;
 }
+function fillRick(cols, rows){
+  let randomArray = [];
+  for(let y = 0; y < rows; y++){
+    randomArray.push([]);
+    for(let x = 0; x < cols; x++){
+      randomArray[y].push(4);
+    }
+  }
+  return randomArray;
+}
 function fillAmong(cols,rows){
   let randomArray = [];
   for(let y = 0; y < rows; y++){
@@ -265,6 +283,11 @@ function dieSound(){
   if(!dSound.isPlaying()){
     dSound.play();
   }
+}
+function disInfo(sizeText){
+  textSize(sizeText);
+  fill(random(50), random(50), random(50));
+  text("Keybinds: r, e, f, space, i, a, c (Must have Caps Lock off)", cellSize * GRIDSIZE + 10 , 55);
 }
 // function theDelay(time, theSound){
 //   let timePassed = 0;
