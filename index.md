@@ -7,6 +7,7 @@
 - [Draw Grid](2DGrid)
 - [Game of Life](GameOfLife)
 - [Char on Grid](CharOnGrid)
+- [Dog OOP Demo](OOPDog)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
