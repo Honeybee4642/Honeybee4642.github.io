@@ -8,6 +8,7 @@
 - [Game of Life](GameOfLife)
 - [Char on Grid](CharOnGrid)
 - [Dog OOP Demo](OOPDog)
+- [Walker OOP](OOPWalker)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
