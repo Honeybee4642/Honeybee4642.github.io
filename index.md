@@ -10,6 +10,7 @@
 - [Dog OOP Demo](OOPDog)
 - [Walker OOP](OOPWalker)
 - [Ball OOP](BallOOP)
+- [Conected Ball OOP](nodes)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
