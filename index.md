@@ -11,6 +11,7 @@
 - [Walker OOP](OOPWalker)
 - [Ball OOP](BallOOP)
 - [Conected Ball OOP](nodes)
+- [Fireworks OOP](Fireworks)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
