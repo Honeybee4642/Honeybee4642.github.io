@@ -12,6 +12,7 @@
 - [Ball OOP](BallOOP)
 - [Conected Ball OOP](nodes)
 - [Fireworks OOP](Fireworks)
+- [Inheritance](Inherit)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
