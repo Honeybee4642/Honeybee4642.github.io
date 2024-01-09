@@ -14,6 +14,7 @@
 - [Fireworks OOP](Fireworks)
 - [Inheritance](Inherit)
 - [Colide 2D Demo](ColisionDemo)
+- [Triange](Triangle)
 ## Projects
 - [ArraysProject](Arrays-Project)
 - [Modified Game of Life](ModGameofLife)
